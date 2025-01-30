@@ -5,6 +5,8 @@ import 'package:barokah/data/app_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
 
 // void main() {
@@ -20,12 +22,23 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   runApp(
-    BlocProvider(
-      create: (context) => HomeBloc()..add(Loadhome()),
+    MultiProvider(
+      providers: [
+        Provider<AppDatabase>(
+          create: (_) => AppDatabase(),
+          dispose: (_, db) => db.close(),
+        ),
+        BlocProvider(
+          create: (context) => HomeBloc()..add(Loadhome()),
+        ),
+
+        
+      ],
       child: MyApp(),
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -35,7 +48,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       builder: EasyLoading.init(),
       home: SplashScreen(),
-      
     );
   }
 }
+

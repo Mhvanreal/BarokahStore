@@ -136,6 +136,12 @@ class AppDatabase {
 // }
 
 
+
+ Future<void> close() async {
+    final db = await database;
+    db.close();
+  }
+  
 /////////////////////////////////////////////////////////////////////////////////////
 
 Future<Map<String, dynamic>?> getUser(String email, String password) async {

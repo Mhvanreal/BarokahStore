@@ -9,6 +9,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc(this.database) : super(LoginInitial()) {
     on<LoginUser>(_onLoginUser);
+    // on<TogglePasswordVisibility>(_onTogglePasswordVisibility);
   }
 
   Future<void> _onLoginUser(LoginUser event, Emitter<LoginState> emit) async {
@@ -31,4 +32,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginFailure("Terjadi kesalahan: ${e.toString()}"));
     }
   }
+  
 }

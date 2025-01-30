@@ -11,3 +11,11 @@ class Loadhome extends HomeEvent{}
 class LogoutUser extends HomeEvent {}
 
 class ConfirmLogout extends HomeEvent {}
+
+class ShowLoginSuccessPopup extends HomeEvent{
+  final String message;
+  ShowLoginSuccessPopup(this.message);
+  @override
+  List<Object> get props => [message];
+}
+

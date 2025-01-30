@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 abstract class LoginState extends Equatable {
   @override
   List<Object> get props => [];
+
+
 }
 
 class LoginInitial extends LoginState {}
@@ -26,3 +28,18 @@ class LoginFailure extends LoginState {
   @override
   List<Object> get props => [error];
 }
+
+// class LoginStateView extends LoginState {
+//   final bool isPasswordVisible;
+
+//   LoginStateView({this.isPasswordVisible = false});
+
+//   LoginStateView copyWith({bool? isPasswordVisible}) {
+//     return LoginStateView(
+//       isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
+//     );
+//   }
+
+//   @override
+//   List<Object> get props => [isPasswordVisible];
+// }

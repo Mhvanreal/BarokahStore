@@ -18,12 +18,19 @@ class LoginPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginBloc(AppDatabase()),
       child: Scaffold(
-        appBar: AppBar(title: Text("Login")),
+        appBar: AppBar(title: Text(
+          "Login Toko Barokah",
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          backgroundColor: Colors.blueAccent,
+        ),
+        
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
           if (state is LoginSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Login Berhasil! ID: ${state.userId}")),
+              SnackBar(content: Text("Login Berhasil! ID: ${state.userId}"),
+              backgroundColor: Colors.green,),
             );
             Navigator.pushReplacement(
               context,
@@ -31,7 +38,7 @@ class LoginPage extends StatelessWidget {
             );
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.error)),
+              SnackBar(content: Text(state.error), backgroundColor: Colors.red,),
             );
           }
         },
@@ -40,29 +47,83 @@ class LoginPage extends StatelessWidget {
               if (state is LoginLoading) {
                 return Center(child: CircularProgressIndicator());
               }
-
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(26.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextField(
+                    SizedBox(height: 50),
+                    Image.asset(
+                      'images/pp.png',
+                      width: 250,
+                      height: 250,
+                    ),
+                    SizedBox(height: 40,),
+                    TextFormField(
                       controller: emailController,
-                      decoration: InputDecoration(labelText: "Email"),
+                      decoration: InputDecoration(
+                        hintText: "Masukan email anda",
+                        hintStyle: TextStyle(color: Colors.white),
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 242, 71, 9),
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.white,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
+                        )
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty){
+                          return "email harus di isi";
+                        }
+                        if (value!.contains('@')){
+                          return "email tidak valid";
+                        }
+                        return null;
+                      },
+                    style: TextStyle(color: Colors.white),
                     ),
-                    TextField(
-                      controller: passwordController,
-                      decoration: InputDecoration(labelText: "Password"),
-                      obscureText: true,
+                    SizedBox(height: 10,),
+                    TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "Masukan password anda",
+                      hintStyle: TextStyle(color: Colors.white),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 242, 71, 9),
+                      prefixIcon: Icon(Icons.lock, color: Colors.white),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
+                        ),
                     ),
-                    SizedBox(height: 16),
+                    validator:(value) {
+                      if(value!.isEmpty){
+                        return "password harus anda isi";
+                      }
+                      return null;
+                    },
+                    style: TextStyle(color: Colors.white),
+                  ),
+                    SizedBox(height:20),
                     ElevatedButton(
                       onPressed: () {
                         final email = emailController.text;
                         final password = passwordController.text;
                         context.read<LoginBloc>().add(LoginUser(email, password));
                       },
-                      child: Text("Login"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        minimumSize: Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("Login", style: TextStyle(fontSize: 17, color:Colors.white),),
                     ),
                     SizedBox(height: 16),
                     GestureDetector(

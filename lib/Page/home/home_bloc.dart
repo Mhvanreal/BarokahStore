@@ -12,22 +12,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState>{
   }
 
   Future<void> _onloadHome(Loadhome event, Emitter<HomeState> emit) async {
-    emit(HomeLoading());
-    try{
-      final prefs = await SharedPreferences.getInstance();
-      final userId = prefs.getString('userId');
-      final userName = prefs.getString('userName');
-      final userEmail = prefs.getString('userEmail');
+  emit(HomeLoading());
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    final userName = prefs.getString('userName');
+    final userEmail = prefs.getString('userEmail');
 
-      if(userId != null && userName != null && userEmail != null){
-        emit(Homeloaded(userId: userId, userName: userName, userEmail: userEmail));
-      }else {
-        emit(HomeError("user data not found"));
-      }
-    }catch (e){
-      emit(HomeError("failed to load Akses"));
+    print('Data saved: userId=$userId, userName=$userName, userEmail=$userEmail');
+
+    if (userId != null && userName != null && userEmail != null) {
+      emit(Homeloaded(userId: userId, userName: userName, userEmail: userEmail));
+    } else {
+      emit(HomeError("User data not found"));
     }
+  } catch (e) {
+    emit(HomeError("Failed to load data"));
   }
+}
+
 
   Future<void> _onlogoutUser(LogoutUser event, Emitter<HomeState> emit) async {
     try {

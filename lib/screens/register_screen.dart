@@ -1,7 +1,7 @@
 import 'package:barokah/Page/register/register_bloc.dart';
 import 'package:barokah/Page/register/register_event.dart';
 import 'package:barokah/Page/register/register_state.dart';
-import 'package:barokah/data/app_database.dart';
+// import 'package:barokah/data/app_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {
-            print("Current state: $state"); // Debugging line
+            print("Current state: $state");
             if (state is RegisterSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Registration successful!')),
