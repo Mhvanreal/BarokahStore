@@ -147,7 +147,6 @@ class LoginPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
                   ],
                 ),
               );
