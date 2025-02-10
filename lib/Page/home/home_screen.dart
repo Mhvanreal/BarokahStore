@@ -1,4 +1,4 @@
-import 'package:barokah/barang/barangScreen.dart';
+import 'package:barokah/barang/screens/barangScreen.dart';
 import 'package:barokah/compenent/menu_card.dart';
 import 'package:barokah/kasir/KasirScreen.dart';
 import 'package:barokah/screens/login_screen.dart';
@@ -27,7 +27,6 @@ class HomePage extends StatelessWidget {
             (route) => false,
           );
         } else if (state is HomeSnackbar) {
-          // Display snackbar messages
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message)),
           );
@@ -35,7 +34,7 @@ class HomePage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Beranda"),
+          title: Text("Beranda", style: TextStyle(color: Colors.white),),
           backgroundColor: Colors.teal,
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
@@ -112,7 +111,7 @@ class HomePage extends StatelessWidget {
                           },
                         ),
                         MenuCard(
-                          title: "Barang",
+                          title: "Product",
                           icon: Icons.inventory_2,
                           onTap: () {
                             context

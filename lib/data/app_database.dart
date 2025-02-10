@@ -49,7 +49,16 @@ class AppDatabase {
         stok_biji INTEGER,
         stok_pax INTEGER,
         jumlah_per_pax INTEGER,
-        tgl_exp TEXT
+        tgl_exp TEXT,
+        image BLOB,
+        id_kategori INTEGER,
+        FOREIGN KEY (id_kategori) REFERENCES kategori (id_kategori) ON DELETE SET NULL
+      )
+    ''');
+    await db.execute('''
+      CREATE TABLE kategori (
+      id_kategori INTEGER PRIMARY KEY AUTOINCREMENT,
+      nama_kategori TEXT,
       )
     ''');
     await db.execute('''

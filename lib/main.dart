@@ -1,7 +1,7 @@
 import 'package:barokah/Page/home/home_bloc.dart';
 import 'package:barokah/Page/home/home_event.dart';
 import 'package:barokah/Page/splash_screen/SplashScreen.dart';
-import 'package:barokah/barang/barangScreen.dart';
+import 'package:barokah/barang/screens/barangScreen.dart';
 import 'package:barokah/data/app_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
